@@ -1,9 +1,11 @@
 ---
 import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
+import "../styles/global.css";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const pageTitle = "关于我";
 ---
 
 <html lang="en">
@@ -12,7 +14,7 @@ import Layout from "../layouts/Layout.astro";
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro</title>
+    <title>{pageTitle}</title>
   </head>
 
   <body>
@@ -20,7 +22,13 @@ import Layout from "../layouts/Layout.astro";
     <a href="/test/about">关于</a>
     <a href="/test/blog">blog</a>
 
-    <h1>我的 Astro 学习博客</h1>
-    <p>在这里，我将分享我的学习 Astro 之旅。</p>
+    <h1>{pageTitle}</h1>
+    <p>这是我的 Astro 学习笔记</p>
+
+    <ul>
+      <li><a href="/test/posts/post-1/">文章 1</a></li>
+      <li><a href="/test/posts/post-2/">文章 2</a></li>
+      <li><a href="/test/posts/post-3/">文章 3</a></li>
+    </ul>
   </body>
 </html>
