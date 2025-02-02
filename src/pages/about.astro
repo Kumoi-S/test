@@ -1,5 +1,7 @@
 ---
+// import Navigation from "../components/Navigation.astro";
 import "../styles/global.css";
+import BaseLayout from "../layouts/BaseLayout.astro";
 
 const pageTitle = "关于我";
 
@@ -13,7 +15,7 @@ const identity = {
 const skills = ["HTML", "CSS", "JavaScript", "React", "Astro", "Writing Docs"];
 
 const happy = true;
-const finished = false;
+const finished = true;
 const goal = 3;
 
 const skillColor = "navy";
@@ -21,12 +23,9 @@ const fontWeight = "bold";
 const textCase = "uppercase";
 ---
 
-<html lang="zh">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>{pageTitle}</title>
-    <style define:vars={{ skillColor, fontWeight, textCase }}>
+<BaseLayout pageTitle={pageTitle}>
+  <body>
+    <style is:global define:vars={{ skillColor, fontWeight, textCase }}>
       h1 {
         color: purple;
         font-size: 4rem;
@@ -37,12 +36,10 @@ const textCase = "uppercase";
         text-transform: var(--textCase);
       }
     </style>
-  </head>
-  <body>
-    <a href="/test">首页</a>
+    <!-- <a href="/test">首页</a>
     <a href="/test/about/">关于</a>
-    <a href="/test/blog/">博客</a>
-    <h1>{pageTitle}</h1>
+    <a href="/test/blog/">博客</a> -->
+
     <h2>……和我的新 Astro 网站！</h2>
 
     <p>
@@ -75,5 +72,8 @@ const textCase = "uppercase";
     {finished && <p>我完成了这节教程！</p>}
 
     {goal === 3 ? <p>我的目标是在三天内完成。</p> : <p>我的目标不是 3 天。</p>}
+    <script>
+      import "../scripts/menu.js";
+    </script>
   </body>
-</html>
+</BaseLayout>

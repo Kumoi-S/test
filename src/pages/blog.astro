@@ -1,34 +1,40 @@
 ---
 import Welcome from "../components/Welcome.astro";
 import Layout from "../layouts/Layout.astro";
-import "../styles/global.css";
+// import Navigation from "../components/Navigation.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import BlogPost from "../components/BlogPost.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const allPosts = Object.values(
+  import.meta.glob("./posts/*.md", { eager: true })
+);
 const pageTitle = "关于我";
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-  </head>
-
+<BaseLayout pageTitle={pageTitle}>
   <body>
-    <a href="/test">首页</a>
+    <!-- <a href="/test">首页</a>
     <a href="/test/about">关于</a>
-    <a href="/test/blog">blog</a>
+    <a href="/test/blog">blog</a> -->
 
-    <h1>{pageTitle}</h1>
     <p>这是我的 Astro 学习笔记</p>
 
     <ul>
-      <li><a href="/test/posts/post-1/">文章 1</a></li>
-      <li><a href="/test/posts/post-2/">文章 2</a></li>
-      <li><a href="/test/posts/post-3/">文章 3</a></li>
+      <!-- {
+        allPosts.map((post: any) => (
+          <li>
+            <a href={post.url}>{post.frontmatter.title}</a>
+          </li>
+        ))
+      } -->
+      {
+        allPosts.map((post: any) => (
+          <BlogPost url={post.url} title={post.frontmatter.title} />
+        ))
+      }
     </ul>
+    <script>
+      import "../scripts/menu.js";
+    </script>
   </body>
-</html>
+</BaseLayout>
