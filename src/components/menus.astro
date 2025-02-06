@@ -1,0 +1,28 @@
+---
+import { MENUS } from "../config";
+---
+
+<ul class="menu">
+  {
+    MENUS.map((item) => (
+      <li>
+        <a href={item.link}>{item.title}</a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .menu {
+    display: flex;
+    list-style: none;
+    padding: 0;
+  }
+  .menu li {
+    margin-right: 1rem;
+  }
+  .menu a {
+    font-size: 1rem;
+    font-weight: 650;
+  }
+</style>

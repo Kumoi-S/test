@@ -1,0 +1,93 @@
+---
+import { Solar } from "lunar-javascript";
+
+type Props = {
+  date: string;
+};
+
+const { date } = Astro.props;
+---
+
+<!-- <a
+  href={`/date/${encodeURI(new Date(date).getFullYear().toString())}`}
+  target="_self"
+  class="meta-date">{date}</a
+> --><!-- <a
+  href={`/date/${encodeURI(new Date(date).getFullYear().toString())}`}
+  target="_self"
+  class="meta-date"
+>
+  {
+    new Intl.DateTimeFormat("zh-CN", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    }).format(new Date(date))
+  }
+</a> --><!-- <a
+  href={`/date/${encodeURI(new Date(date).getFullYear().toString())}`}
+  target="_self"
+  class="meta-date"
+>
+  {
+    new Date(date).toLocaleDateString("zh-CN").replace(/\//g, "-") +
+      " | " +
+      new Date(date)
+        .toLocaleDateString("zh-CN-u-ca-chinese")
+        .replace(
+          /(\d+)\s*?年/,
+          (_, y) =>
+            "甲乙丙丁戊己庚辛壬癸".charAt((y - 4) % 10) +
+            "子丑寅卯辰巳午未申酉戌亥".charAt((y - 4) % 12) +
+            "年"
+        )
+  }
+</a> --><!-- <a
+  href={`/date/${encodeURIComponent(new Date(date).getFullYear().toString())}`}
+  target="_self"
+  class="meta-date"
+>
+  {
+    (() => {
+      const d = new Date(date);
+
+      // 公历日期格式化为 YYYY-MM-DD
+      const formattedDate = d.toLocaleDateString("zh-CN").replace(/\//g, "-");
+
+      // 天干地支年份转换
+      const getLunarYear = (year) => {
+        const gan = "甲乙丙丁戊己庚辛壬癸";
+        const zhi = "子丑寅卯辰巳午未申酉戌亥";
+        const ganIndex = (year - 4) % 10;
+        const zhiIndex = (year - 4) % 12;
+        return gan[ganIndex] + zhi[zhiIndex] + "年";
+      };
+
+      // 农历日期（包括天干地支）格式化
+      const lunarDate = d
+        .toLocaleDateString("zh-CN-u-ca-chinese")
+        .replace(/(\d+)\s*年/, (_, y) => getLunarYear(y));
+
+      return `${formattedDate} | ${lunarDate}`;
+    })()
+  }
+</a> -->
+<a
+  href={`/date/${encodeURI(new Date(date).getFullYear().toString())}`}
+  target="_self"
+  class="meta-date"
+>
+  {
+    (() => {
+      const d = new Date(date);
+      return (
+        d.toLocaleDateString("zh-CN").replace(/\//g, "-") +
+        " | " +
+        Solar.fromYmd(d.getFullYear(), d.getMonth() + 1, d.getDate())
+          .getLunar()
+          .toString()
+          .slice(2)
+      );
+    })()
+  }
+</a>

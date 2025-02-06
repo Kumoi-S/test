@@ -1,24 +1,20 @@
 ---
-// const platform = "github";
-// const username = "Kumoi-S";
-import Social from "./Social.astro";
+import { FOOTER_CONTENT } from "../config";
 ---
 
+<footer>
+  <p>
+    <mark>QQ：524562783</mark>
+  </p>
+  <p>
+    <mark>微信：zhou13651033473</mark>
+  </p>
+</footer>
+
 <style>
-  footer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
+  footer p {
+    text-align: center;
+    margin-top: 0.5rem;
+    font-size: 1rem;
   }
 </style>
-
-<footer>
-  <!-- <p>
-    Learn more about my projects on <a
-      href={`https://www.${platform}.com/${username}`}>{platform}</a
-    >!
-  </p> -->
-  <Social platform="twitter" username="astrodotbuild" />
-  <Social platform="github" username="Kumoi-S" />
-  <Social platform="youtube" username="astrodotbuild" />
-</footer>
